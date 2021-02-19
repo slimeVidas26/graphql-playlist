@@ -3,3 +3,5 @@ https://www.youtube.com/watch?v=A8vtRvz-lK0&list=PL4cUxeGkcC9iK6Qhn-QLcXCXPQUov1
 https://github.com/slimeVidas26/graphql-playlist/blob/setting-up-graphql/server/app.js
 http://localhost:4000/graphql
 Switched to a new branch 'graphql-schema'
+
+On branch add-types-root-query finish
