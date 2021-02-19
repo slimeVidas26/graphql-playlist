@@ -10,12 +10,12 @@ const _ = require('lodash')
 
 //dummy data
 var books = [
-    {name : "Le nom de la rose" , genre : "History" , id : 1 , authorId:"1"},
-    {name : "Piege de Cristal" , genre : "Policier" , id : 2 , authorId:"3"},
-    {name : "5Th Avenue" , genre : "Sci-Fi" , id : 3 , authorId:"2"},
-    {name : "La Melodie Du Bonheur" , genre : "Amour" , id : 4 , authorId:"2"},
-    {name : "L'arme Fatale" , genre : "Policier" , id : 5 , authorId:"3"},
-    {name : "Central Park" , genre : "Enquete" , id : 6 , authorId:"3"}
+    {name : "Le nom de la rose" , genre : "History" , id : "1" , authorId:"1"},
+    {name : "Piege de Cristal" , genre : "Policier" , id : "2" , authorId:"3"},
+    {name : "5Th Avenue" , genre : "Sci-Fi" , id : "3" , authorId:"2"},
+    {name : "La Melodie Du Bonheur" , genre : "Amour" , id : "4" , authorId:"2"},
+    {name : "L'arme Fatale" , genre : "Policier" , id : "5" , authorId:"3"},
+    {name : "Central Park" , genre : "Enquete" , id : "6" , authorId:"3"}
 ];
 
 var authors = [
@@ -76,7 +76,19 @@ const RootQuery = new GraphQLObjectType({
         resolve(parent , args){
            return _.find(authors , {id : args.id})
         }
-    } 
+    },
+      books : {
+          type : new GraphQLList(BookType),
+          resolve(parent , args){
+              return books
+          }
+      },
+      authors : {
+          type : new GraphQLList(AuthorType),
+          resolve(parent , args){
+              return authors
+          }
+      }
     }
 });
 
