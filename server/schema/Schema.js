@@ -4,20 +4,24 @@ const {GraphQLObjectType ,
      GraphQLInt,
      GraphQLID,
      GraphQLSchema,
+     GraphQLList,
     } = graphql;
 const _ = require('lodash')
 
 //dummy data
 var books = [
-    {name : "Le nom de la rose" , genre : "History" , id : "1" , authorId:1},
-    {name : "Piege de Cristal" , genre : "Policier" , id : "2" , authorId:3},
-    {name : "5Th Avenue" , genre : "Sci-Fi" , id : "3" , authorId:2},
+    {name : "Le nom de la rose" , genre : "History" , id : 1 , authorId:"1"},
+    {name : "Piege de Cristal" , genre : "Policier" , id : 2 , authorId:"3"},
+    {name : "5Th Avenue" , genre : "Sci-Fi" , id : 3 , authorId:"2"},
+    {name : "La Melodie Du Bonheur" , genre : "Amour" , id : 4 , authorId:"2"},
+    {name : "L'arme Fatale" , genre : "Policier" , id : 5 , authorId:"3"},
+    {name : "Central Park" , genre : "Enquete" , id : 6 , authorId:"3"}
 ];
 
 var authors = [
-    {name : "John Le Carre" , age : 45 , id : 1},
-    {name : "Guillaume Musso" , age : 56 , id : 2},
-    {name : "Douglas Kennedy" , age : 68 , id : 3},
+    {name : "John Le Carre" , age : 45 , id : "1"},
+    {name : "Guillaume Musso" , age : 56 , id : "2"},
+    {name : "Douglas Kennedy" , age : 68 , id : "3"},
 ];
 
  //create Book Type
@@ -43,7 +47,15 @@ const AuthorType = new GraphQLObjectType({
     fields :()=> ({
         id : {type : GraphQLID},
         name : {type : GraphQLString},
-        age : {type : GraphQLInt}
+        age : {type : GraphQLInt},
+        books : {
+            type : new GraphQLList(BookType),
+            resolve(parent,args){
+                console.log(parent)
+                return  _.filter(books , {authorId : parent.id})
+            } 
+        }
+      
     })
 });
 
