@@ -5,3 +5,4 @@ http://localhost:4000/graphql
 Switched to a new branch 'graphql-schema'
 
 On branch add-types-root-query finish
+on branch connecting-to-mLab 
