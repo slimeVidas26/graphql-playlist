@@ -2,6 +2,10 @@ const express = require('express');
 const {graphqlHTTP} = require('express-graphql');
 const schema = require('./schema/Schema');
 const mongoose = require('mongoose')
+const cors = require('cors')
+
+
+
 
 // DB Config
 const db = require("./config/keys").mongoURI;
@@ -25,6 +29,9 @@ mongoose
 // });
 
 const app = express();
+
+//allow cross-origin
+app.use(cors())
 
 app.use('/graphql' , graphqlHTTP({
 schema,
