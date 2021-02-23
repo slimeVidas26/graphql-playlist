@@ -1,20 +1,20 @@
 import React from 'react';
 import {graphql} from 'react-apollo'
-import {getBooksQuery} from '../queries/queries'
+import { getBooksQuery} from '../queries/queries'
 
 
 
 
-function BookList({data}) {
-
+function BookList(props) {
+console.log(props)
      function displayBooks(){
-        if(data.loading){
+        if(props.data.loading){
             return (
                 <div>Loading Books ...</div>
             )
         }
         else{
-            return data.books.map(book=>{
+            return props.data.books.map(book=>{
                return(
                    <li key = {book.id}>{book.name}</li>
                )

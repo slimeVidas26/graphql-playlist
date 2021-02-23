@@ -1,22 +1,27 @@
 import React , {useState} from 'react';
 import {graphql} from 'react-apollo';
-import {getAuthorsQuery} from '../queries/queries';
+import * as compose from 'lodash.flowright';
+import {getAuthorsQuery , addBookMutation} from '../queries/queries';
 
-function AddBook({data}) {
+function AddBook(props) {
 
     const [name , setName] = useState("");
-    const [genre , setGenre] = useState("")
-    const [authorId , setAuthorId] = useState("")
+    const [genre , setGenre] = useState("");
+    const [authorId , setAuthorId] = useState("");
 
 
     function submitForm(e){
         e.preventDefault();
-        console.log(name , genre , authorId)
+        // console.log(name)
+        props.addBookMutation()
     }
 
 
     function displayAuthors(){
+        console.log(props)
+        var data = props.getAuthorsQuery
        if(data.loading){
+       
            return (
                <option>Loading Authors ...</option>
            )
@@ -24,7 +29,7 @@ function AddBook({data}) {
        else{
            return data.authors.map(author=>{
               return(
-                  <option key = {author.id}>{author.name}</option>
+                  <option key = {author.id} value = {author.id}>{author.name}</option>
               )
            })
        }
@@ -45,7 +50,7 @@ function AddBook({data}) {
 
                <div className = "field">
                    <label>Author</label>
-                  <select name ={authorId} onChange = {(e)=>{setAuthorId(e.target.value)}}>
+                  <select  onChange = {(e)=>{setAuthorId(e.target.value)}}>
                       <option>Select Author</option>
                       {displayAuthors()}
                   </select>
@@ -58,4 +63,9 @@ function AddBook({data}) {
     
  }
  
- export default graphql(getAuthorsQuery)(AddBook);
+ export default compose(
+  graphql(getAuthorsQuery , {name : 'getAuthorsQuery'}),
+  graphql(addBookMutation , {name : "addBookMutation"})
+ )(AddBook);
+ 
+              
