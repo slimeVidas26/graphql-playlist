@@ -1,4 +1,4 @@
-import React , {Component} from 'react';
+import React from 'react';
 import {gql} from 'apollo-boost';
 import {graphql} from 'react-apollo'
 
@@ -34,6 +34,7 @@ function BookList({data}) {
     
         return (
             <div className="book-list">
+            <h2>Ninja Book List</h2>
               <ul>
                  {displayBooks()}
               </ul>
