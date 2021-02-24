@@ -31,9 +31,9 @@ console.log(props)
   
     
         return (
-            <div className="book-list">
+            <div>
             <h2>Ninja Book List</h2>
-              <ul>
+              <ul id ="book-list">
                  {displayBooks()}
               </ul>
               <BookDetails bookId = {selected} />
